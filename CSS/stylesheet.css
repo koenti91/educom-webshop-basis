@@ -1,1 +1,104 @@
-/* Cascade Style Sheet for this website */
+
+body {
+    width: 800px;
+    height: 100%;
+    margin: auto;
+    max-width: 800px;
+    font-family: Tahoma;
+    background-color: #FEFBF6;
+    color:#3D3C42;
+    font-size: 12px;
+}
+
+header {
+    height: 50px;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.nav-tabs {
+    list-style-type: none;
+    margin: 0;  
+    padding: 0;
+    overflow: hidden;
+    background-color: #A6D1E6;
+    border-radius: 50px 15px;
+}
+
+.nav-tabs li {
+    float: left;
+    display: inline;
+    padding-left: 20px;
+}
+
+.nav-tabs li a { 
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: #FEFBF6;
+    }
+
+h3 {
+    font-size: 20px;
+    margin: 16px 0;
+}    
+
+label {
+    display: inline-block;
+    margin: 8px 0;
+    width: 100px;
+    text-align: left;
+    }
+
+.option {
+    width: 50px;
+    }
+
+fieldset {
+    border: none;
+}
+
+.preferred {
+    display: flex;
+    overflow: hidden;
+}
+
+.aanhef, .naam, .email, .phone, .question, .submit {
+    width: 400px;
+    box-sizing: border-box;
+}
+
+.radio {
+    display: inline-block;
+    width: 20px;
+}
+
+textarea {
+    vertical-align: middle;
+    width: 400px;
+    height: 100px;
+    box-sizing: border-box;
+}
+
+.submit {
+    margin-top: 20px;
+    margin-left: 114px;
+    width: 400px;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 10px rounded #3D3C42;
+}
+
+footer {
+    background-color: #3D3C42;
+    border-radius: 50px 15px;
+}
+
+.copyright {
+    color: #FEFBF6;
+    text-align: right;
+    font-size: 10px;
+    margin-right: 10px;
+}

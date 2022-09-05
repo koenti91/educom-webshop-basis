@@ -2,58 +2,59 @@
 <html>
     <head>
         <title>Home</title>
+        <link rel="stylesheet" href="css/stylesheet.css">
     </head>
 
     <body>
-        <h1>Contact</h1>
+        <header>Contact
+        </header>
 
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+        <div class="menu">
+            <ul class="nav-tabs">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div> 
 
         <h3>Contactformulier</h3>
 
         <form action="/action_page.php" method="get">
             <fieldset>
             <label for="aanhef">Aanhef:</label>
-            <select aanhef="aanhef" id="aanhef" required>
-              <option value="selected"="selected">Kies aanhef</option>
+            <select class="aanhef" aanhef="aanhef" id="aanhef" required>
+              <option value="" selected="selected">Kies aanhef</option>
               <option value="de-heer.">De heer</option>
               <option value="mevrouw">Mevrouw</option>
               <option value="none">Geen</option>
             </select>
             <br>
             <label for="naam">Naam: </label>
-            <input type="text" id="name" name="name" placeholder="Henk de Vries" maxlength="50" required>
+            <input class="naam" type="text" id="name" name="name" placeholder="Henk de Vries" maxlength="50" required>
             <br>
             <label for="email">E-mail: </label>
-            <input type="email" id="email" name="email" placeholder="henk74@gmail.com" maxlength="60" required>
+            <input class="email" type="email" id="email" name="email" placeholder="henk74@gmail.com" maxlength="60" required>
             <br>
             <label for="phone">Telefoon: </label>
-            <input type="tel" id="phone" name="phone" placeholder="0612345678" maxlength="10" pattern="[0-9]{10}" required>
+            <input class="phone" type="text" id="phone" name="phone"tel" id="phone" name="phone" placeholder="0612345678" maxlength="10" pattern="[0-9]{10}" required>
             </fieldset>
                 
             <fieldset>
-                <label for="preferred">Communicatievoorkeur: </label>
-                <input type="radio" id="pref-1" name="preferred" value="pref-1">
-                <label for="pref-1">Per e-mail</label>
-                <input type="radio" id="pref-2" name="preferred" value="pref-2">
-                <label for="pref-2">Telefonisch</label>
+                <label for="preferred">Voorkeur contact: </label>
+                <input type="radio" id="pref-1" name="preferred" value="email">
+                <label for="pref-1" class="option">Mailen</label>
+                <input type="radio" id="pref-2" name="preferred" value="phone">
+                <label for="pref-2" class="option">Bellen</label>
+                </div>
                 <br>
 
-                <label for="question">Vraag/suggestie: 
-                    <textarea id="question" name="question" rows="5" cols="60" maxlength="1000"></textarea>
-                </label>
-                
+                <label for="question">Vraag/suggestie: </label>
+                <textarea id="question" name="question" maxlength="1000"></textarea>
             </fieldset>
-            <input type="submit" value="Submit">
-          </form> 
-
-        <footer>
-            <h6>&copy; 2022 Koen Tiepel</h6>
-        </footer>
+            <input class="submit" name="submit" type="submit" value="Submit">
+        </form> 
+        <br>
+        <footer><p class="copyright">&copy; 2022 Koen Tiepel</p></footer>
     </body>
 
 </html> 
