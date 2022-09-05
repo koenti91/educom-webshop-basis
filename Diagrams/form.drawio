@@ -1,0 +1,186 @@
+<mxfile host="65bd71144e">
+    <diagram id="ROttpoXFVoA_k4PHo7Sx" name="Page-1">
+        <mxGraphModel dx="909" dy="1090" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="PSD Form Data" style="swimlane;startSize=60;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="30" width="460" height="60" as="geometry">
+                        <mxRectangle x="300" y="40" width="50" height="40" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4" value="&lt;span&gt;Verplichte velden ingevuld (aanhef, naam, mail, telefoon)?&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="110" width="460" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="" style="endArrow=none;html=1;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="430" y="270" as="sourcePoint"/>
+                        <mxPoint x="660" y="200" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="11" value="" style="endArrow=none;html=1;" edge="1" parent="1" target="4">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="430" y="270" as="sourcePoint"/>
+                        <mxPoint x="480" y="220" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="200" y="200"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="12" value="ja" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="230" y="230" width="20" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="nee&lt;br&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="590" y="230" width="40" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="270" width="460" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="" style="endArrow=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="14">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="380" y="320" as="sourcePoint"/>
+                        <mxPoint x="430" y="270" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="16" value="Error: vul aanhef/naam/mail/tel in&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="440" y="290" width="190" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="Stap 1:" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="400" y="130" width="50" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="" style="endArrow=none;html=1;" edge="1" parent="1" target="14">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="200" y="330" as="sourcePoint"/>
+                        <mxPoint x="250" y="280" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="23" value="" style="endArrow=none;html=1;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="270" y="330" as="sourcePoint"/>
+                        <mxPoint x="270" y="270" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="24" value="" style="endArrow=none;html=1;" edge="1" parent="1" target="28">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="360" y="330" as="sourcePoint"/>
+                        <mxPoint x="360" y="270" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="25" value="man&lt;br&gt;&lt;br&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="210" y="290" width="40" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="vrouw&lt;br&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="290" y="290" width="50" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="anders&lt;br&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="363.5" y="290" width="50" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="330" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" value="Ga door naar stap 2." style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="250" y="350" width="130" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="415" width="460" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="Stap 2: bevat de naam letters en spaties?" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="310" y="440" width="240" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="" style="endArrow=none;html=1;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="440" y="520" as="sourcePoint"/>
+                        <mxPoint x="200" y="460" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="36" value="" style="endArrow=none;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="41">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="610" y="510" as="sourcePoint"/>
+                        <mxPoint x="660" y="460" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="37" value="&lt;br&gt;&lt;br&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="590" y="515" width="20" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="ja&lt;br&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="240" y="480" width="20" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="nee&lt;br&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="590" y="480" width="40" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" value="Error: deze ruimte mag alleen letters en spaties bevatten." style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="440" y="520" width="220" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" value="Ga door naar stap 3." style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="520" width="240" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="43" value="" style="endArrow=none;html=1;exitX=0.348;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="14">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="310" y="320" as="sourcePoint"/>
+                        <mxPoint x="360" y="270" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="49" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="630" width="460" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="53" value="" style="endArrow=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="49">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="610" y="750" as="sourcePoint"/>
+                        <mxPoint x="660" y="700" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="54" value="" style="endArrow=none;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" target="49">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="200" y="700" as="sourcePoint"/>
+                        <mxPoint x="250" y="650" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="55" value="Stap 3: bevat het e-mailadres een @- en een .-teken?" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="280" y="660" width="300" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="56" value="ja" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="240" y="720" width="20" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="57" value="nee&lt;br&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="580" y="720" width="40" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="58" value="Error: dit is geen geldig e-mailadres." style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="430" y="750" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="59" value="Ga door naar stap 4." style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="750" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="60" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="830" width="460" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="61" value="" style="endArrow=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" source="60" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="610" y="980" as="sourcePoint"/>
+                        <mxPoint x="660" y="930" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="62" value="" style="endArrow=none;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" target="60" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="200" y="930" as="sourcePoint"/>
+                        <mxPoint x="250" y="880" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="63" value="Stap 4: Bestaat het telefoonnummer uit 10 cijfers?" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="285" y="880" width="280" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="64" value="ja" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="230" y="950" width="20" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="65" value="nee&lt;br&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="590" y="950" width="40" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="66" value="Error: het telefoonnummer dient uit 10 cijfers te bestaan." style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="430" y="980" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="67" value="Bedankt voor het invullen, $naam." style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="980" width="230" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
