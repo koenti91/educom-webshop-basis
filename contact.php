@@ -12,12 +12,13 @@
          $sexErr = $nameErr = $emailErr = $phoneErr = $preferredErr = $questionErr = '';
          $valid = false;
 
+
          if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (!isset($_POST['sex'])) {
-                $aanhefErr = "Aanhef is verplicht";
+                $sexErr = "Aanhef is verplicht.";
             } else {
-                $aanhef = test_input($_POST['aanhef']);
+                $sex = test_input($_POST['sex']);
                 
                 switch ($sex) {
                     case 'sir':
@@ -26,7 +27,7 @@
                        break;
 
                     default:
-                      $sexErr = "Aanhef is niet correct";
+                      $sexErr = "Aanhef is niet correct.";
                       break;       
                 }
             }
@@ -39,8 +40,37 @@
                     $nameErr = "Alleen letters en spaties zijn toegestaan.";
                     }
             }
+            
+            if (empty($_POST["email"])) {
+                $emailErr = "E-mail is verplicht";
+            } else {
+                $email = test_input($_POST["email"]);
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                  $emailErr = "Vul een correct e-mailadres in";
+                }
+            }
+            
+            if (empty($_POST["phone"])) {
+                $phoneErr = "Telefoonnummer is verplicht";
+            } else {
+                $phone = test_input($_POST["phone"]);
+                if (!preg_match("/^[0-9]{10}*$/",$phone)) {
+                    $phoneErr = "Alleen telefoonnummers met tien cijfers zijn toegestaan.";
+                }
+            }
 
-         }
+            if (empty($_POST["preferred"])) {
+                $preferredErr = "Vul een voorkeur in.";
+            }   else {
+                $preferred = test_input($_POST["preferred"]);
+            }
+
+            if (empty($_POST["question"])) {
+                $questionErr = " Vul hier je vraag of opmerking in.";
+            }   else {
+                $question = test_input($_POST["question"]);
+            }  
+        }       
 
        ?>
         <header>Contact
@@ -70,22 +100,22 @@
             <input class="name" type="text" id="name" name="name" placeholder="Henk de Vries" maxlength="50" value="<?php echo $name; ?>" required>
             <br>
             <label for="email">E-mail: </label>
-            <input class="email" type="email" id="email" name="email" placeholder="henk74@gmail.com" maxlength="60" required>
+            <input class="email" type="email" id="email" name="email" placeholder="henk74@gmail.com" maxlength="60" value="<?php echo $email; ?>" required>
             <br>
             <label for="phone">Telefoon: </label>
-            <input class="phone" type="text" id="phone" name="phone" placeholder="0612345678" maxlength="10" pattern="[0-9]{10}" required>
+            <input class="phone" type="text" id="phone" name="phone" placeholder="0612345678" maxlength="10" pattern="[0-9]{10}" value="<?php echo $phone; ?>" required>
             </fieldset>
                 
             <fieldset>
                 <label for="preferred">Voorkeur contact: </label>
-                <input type="radio" id="pref-1" name="preferred" value="email" required>
+                <input type="radio" id="pref-1" name="preferred" <?php if (isset($preferred) && $preferred=="email") echo "checked";?> value="email" required>
                 <label for="pref-1" class="option">Mailen</label>
-                <input type="radio" id="pref-2" name="preferred" value="phone">
+                <input type="radio" id="pref-2" name="preferred" <?php if (isset($preferred) && $preferred=="email") echo "checked";?> value="phone">
                 <label for="pref-2" class="option">Bellen</label>
                 <br>
 
                 <label for="question">Vraag/suggestie: </label>
-                <textarea id="question" name="question" maxlength="1000"></textarea>
+                <textarea id="question" name="question" maxlength="1000" value="<?php echo $question; ?>" required></textarea>
             </fieldset>
             <input class="submit" name="submit" type="submit" value="Submit">
         </form> 
