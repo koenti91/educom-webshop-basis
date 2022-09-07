@@ -53,8 +53,8 @@
                 $phoneErr = "Telefoonnummer is verplicht";
             } else {
                 $phone = test_input($_POST["phone"]);
-                if (!preg_match("/^0([0-9]{9})$",$phone)) {
-                    $phoneErr = "Alleen telefoonnummers met tien cijfers zijn toegestaan.";
+                if (!preg_match("/^0([0-9]{9})$/",$phone)) {
+                    $phoneErr = "Vul een geldig telefoonnummer in.";
                 }
             }
 
@@ -69,7 +69,20 @@
             }   else {
                 $question = test_input($_POST["question"]);
             }  
-        }
+
+            if (empty($genderErr) && empty($nameErr) && empty($emailErr) && 
+                empty($phoneErr) && empty($preferredErr) && empty($questionErr))  {
+           
+                $valid = true;
+            } 
+         }
+
+        function test_input($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+          }
        ?>
 
         <header>Contact
@@ -85,14 +98,16 @@
 
         <h3>Contactformulier</h3>
 
+        <?php if (!$valid) { ?>
+
         <form action="contact.php" method="post">
             <fieldset>
             <label for="gender">Aanhef:</label>
             <select class="gender" name="gender" id="gender" required>
-              <option value="" selected="selected">Kies aanhef</option>
-              <option value="sir">De heer</option>
-              <option value="madam">Mevrouw</option>
-              <option value="other">Anders</option>
+              <option value="">Kies aanhef</option>
+              <option value="sir" <?php if ($gender=="sir") echo 'selected="selected"';?>>De heer</option>
+              <option value="madam" <?php if ($gender=="madam") echo 'selected="selected"';?>>Mevrouw</option>
+              <option value="other" <?php if ($gender=="other") echo 'selected="selected"';?>>Anders</option>
             </select>
             <span class="error">* <?php echo $genderErr; ?></span>
             <br>
@@ -113,18 +128,32 @@
                 <label for="preferred">Voorkeur contact: </label>
                 <input type="radio" id="pref-1" name="preferred" <?php if (isset($preferred) && $preferred=="email") echo "checked";?> value="email" required>
                 <label for="pref-1" class="option">Mailen</label>
-                <input type="radio" id="pref-2" name="preferred" <?php if (isset($preferred) && $preferred=="email") echo "checked";?> value="phone">
+                <input type="radio" id="pref-2" name="preferred" <?php if (isset($preferred) && $preferred=="phone") echo "checked";?> value="phone">
                 <label for="pref-2" class="option">Bellen</label>
                 <span class="error">* <?php echo $preferredErr; ?></span>
                 <br>
 
                 <label for="question">Vraag/suggestie: </label>
-                <textarea id="question" name="question" maxlength="1000" value="<?php echo $question; ?>" required></textarea>
+                <textarea id="question" name="question" maxlength="1000" required><?php echo $question; ?></textarea>
                 <span class="error">* <?php echo $questionErr; ?></span>
             </fieldset>
             <input class="submit" name="submit" type="submit" value="Submit">
         </form> 
         <br>
+        <?php } else { ?>
+            <p>Bedankt voor het invullen. Ik neem zo snel mogelijk contact met je op!</p>
+            <?php
+            echo "<h2>Jouw gegevens:</h2>";
+            echo $name;
+            echo "<br>";
+            echo $email;
+            echo "<br>";
+            echo $phone;
+            echo "<br>";
+            echo $preferred;
+            echo "<br>";
+            echo $question;?>
+        <?php } ?>
         <footer><p class="copyright">&copy; 2022 Koen Tiepel</p></footer>
     </body>
 
