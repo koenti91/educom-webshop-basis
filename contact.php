@@ -8,38 +8,37 @@
     <body>
        <?php
 
-         $sex = $name = $email = $phone = $preferred = $question = '';
-         $sexErr = $nameErr = $emailErr = $phoneErr = $preferredErr = $questionErr = '';
+         $gender = $name = $email = $phone = $preferred = $question = '';
+         $genderErr = $nameErr = $emailErr = $phoneErr = $preferredErr = $questionErr = '';
          $valid = false;
 
-
+        
          if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-            if (!isset($_POST['sex'])) {
-                $sexErr = "Aanhef is verplicht.";
+            if (!isset($_POST['gender'])) { 
+                $genderErr = "Aanhef is verplicht.";
             } else {
-                $sex = test_input($_POST['sex']);
-                
-                switch ($sex) {
+                $gender = test_input($_POST['gender']);
+            
+                switch ($gender) {
                     case 'sir':
                     case 'madam':
                     case 'other':
                        break;
 
                     default:
-                      $sexErr = "Aanhef is niet correct.";
+                      $genderErr = "Aanhef is niet correct.";
                       break;       
                 }
-            }
+                }
 
-            if (!isset($_POST['name'])) {
+            if (empty($_POST['name'])) {
                 $nameErr = "Naam is verplicht";
             } else {
-                $name = test_input($_POST['name']);
+                $name = test_input($_POST['name']);}
                 if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
                     $nameErr = "Alleen letters en spaties zijn toegestaan.";
                     }
-            }
             
             if (empty($_POST["email"])) {
                 $emailErr = "E-mail is verplicht";
@@ -54,7 +53,7 @@
                 $phoneErr = "Telefoonnummer is verplicht";
             } else {
                 $phone = test_input($_POST["phone"]);
-                if (!preg_match("/^[0-9]{10}*$/",$phone)) {
+                if (!preg_match("/^0([0-9]{9})$",$phone)) {
                     $phoneErr = "Alleen telefoonnummers met tien cijfers zijn toegestaan.";
                 }
             }
@@ -70,9 +69,9 @@
             }   else {
                 $question = test_input($_POST["question"]);
             }  
-        }       
-
+        }
        ?>
+
         <header>Contact
         </header>
 
@@ -88,8 +87,8 @@
 
         <form action="contact.php" method="post">
             <fieldset>
-            <label for="sex">Aanhef:</label>
-            <select class="sex" name="sex" id="sex" required>
+            <label for="gender">Aanhef:</label>
+            <select class="gender" name="gender" id="gender" required>
               <option value="" selected="selected">Kies aanhef</option>
               <option value="sir">De heer</option>
               <option value="madam">Mevrouw</option>

@@ -65,7 +65,7 @@ fieldset {
     overflow: hidden;
 }
 
-.sex, .name, .email, .phone, .question, .submit {
+.gender, .name, .email, .phone, .question, .submit {
     width: 400px;
     box-sizing: border-box;
 }
