@@ -7,6 +7,9 @@
 
     <body>
        <?php
+        
+        define("GENDERS", array("sir" => "De heer", "madam" => "Mevrouw", "other" => "Anders"));
+        define("PREFERRED", array("email" => "E-mail", "phone" => "Telefoon"));
 
          $gender = $name = $email = $phone = $preferred = $question = '';
          $genderErr = $nameErr = $emailErr = $phoneErr = $preferredErr = $questionErr = '';
@@ -15,7 +18,7 @@
         
          if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-            if (!isset($_POST['gender'])) { 
+            if (empty($_POST['gender'])) { 
                 $genderErr = "Aanhef is verplicht.";
             } else {
                 $gender = test_input($_POST['gender']);
@@ -31,6 +34,15 @@
                       break;       
                 }
                 }
+                
+            if (!isset($_POST['gender'])) {
+                $genderErr = "Aanhef is niet correct.";
+                } else {
+                    $gender = test_input($_POST['gender']);
+                    }
+                    if (!array_key_exists($gender, GENDERS)) {
+                        $genderErr = "Aanhef is niet correct.";
+                    }
 
             if (empty($_POST['name'])) {
                 $nameErr = "Naam is verplicht";
@@ -63,6 +75,16 @@
             }   else {
                 $preferred = test_input($_POST["preferred"]);
             }
+
+            if (!isset($_POST['preferred'])) {  
+                $prederredErr = "Vul een voorkeur in."; 
+            } else { 
+                $preferred = test_input($_POST['preferred']); 
+         
+                if (!array_key_exists($preferred, PREFERRED)) {
+                     $preferredErr = "Vul een voorkeur in.";  
+                }
+            } 
 
             if (empty($_POST["question"])) {
                 $questionErr = " Vul hier je vraag of opmerking in.";
@@ -108,6 +130,11 @@
               <option value="sir" <?php if ($gender=="sir") echo 'selected="selected"';?>>De heer</option>
               <option value="madam" <?php if ($gender=="madam") echo 'selected="selected"';?>>Mevrouw</option>
               <option value="other" <?php if ($gender=="other") echo 'selected="selected"';?>>Anders</option>
+              <?php 
+                foreach(GENDERS as $gender_key => $gender_value) {
+                    echo '<option value="' . $gender_key . '">' . $gender_value .'</option>' . PHP_EOL; 
+                } 
+            ?>
             </select>
             <span class="error">* <?php echo $genderErr; ?></span>
             <br>
@@ -130,6 +157,11 @@
                 <label for="pref-1" class="option">Mailen</label>
                 <input type="radio" id="pref-2" name="preferred" <?php if (isset($preferred) && $preferred=="phone") echo "checked";?> value="phone">
                 <label for="pref-2" class="option">Bellen</label>
+                <?php 
+                    foreach(PREFERRED as $preferred_key => $preferred_value) {
+                        echo '<radio value="' . $preferred_key . '">' . $preferred_value .'</option>' . PHP_EOL; 
+                    } 
+                ?>
                 <span class="error">* <?php echo $preferredErr; ?></span>
                 <br>
 
@@ -144,13 +176,15 @@
             <p class="bedankt">Bedankt voor het invullen. Ik neem zo snel mogelijk contact met je op!</p>
             <h2>Jouw gegevens:</h2>
             <?php
+            echo GENDERS[$gender];
+            echo "<br>";
             echo $name;
             echo "<br>";
             echo $email;
             echo "<br>";
             echo $phone;
             echo "<br>";
-            echo $preferred;
+            echo PREFERRED[$preferred];
             echo "<br>";
             echo $question;?>
         <?php } ?>
