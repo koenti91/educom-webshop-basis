@@ -52,6 +52,10 @@ label {
     text-align: left;
     }
 
+.error {
+    color: red;
+}
+
 .option {
     width: 50px;
     }
