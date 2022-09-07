@@ -141,9 +141,9 @@
         </form> 
         <br>
         <?php } else { ?>
-            <p>Bedankt voor het invullen. Ik neem zo snel mogelijk contact met je op!</p>
+            <p class="bedankt">Bedankt voor het invullen. Ik neem zo snel mogelijk contact met je op!</p>
+            <h2>Jouw gegevens:</h2>
             <?php
-            echo "<h2>Jouw gegevens:</h2>";
             echo $name;
             echo "<br>";
             echo $email;

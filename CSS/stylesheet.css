@@ -40,6 +40,10 @@ header {
     color: #FEFBF6;
     }
 
+h2, h3, .bedankt {
+    padding-left: 10px;
+}    
+
 h3 {
     font-size: 20px;
     margin: 16px 0;
