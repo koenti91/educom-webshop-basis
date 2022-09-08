@@ -9,7 +9,7 @@
        <?php
         
         define("GENDERS", array("sir" => "De heer", "madam" => "Mevrouw", "other" => "Anders"));
-        define("PREFERRED", array("email" => "E-mail", "phone" => "Telefoon"));
+        define("PREFERRED", array("email" => "E-mail", "phone" => "Telefoon", "pidgeon" => "Postduif"));
 
          $gender = $name = $email = $phone = $preferred = $question = '';
          $genderErr = $nameErr = $emailErr = $phoneErr = $preferredErr = $questionErr = '';
@@ -22,18 +22,10 @@
                 $genderErr = "Aanhef is verplicht.";
             } else {
                 $gender = test_input($_POST['gender']);
-            
-                switch ($gender) {
-                    case 'sir':
-                    case 'madam':
-                    case 'other':
-                       break;
-
-                    default:
+                if (!array_key_exists($gender, GENDERS)) {
                       $genderErr = "Aanhef is niet correct.";
-                      break;       
                 }
-                }
+            }
                 
             if (!isset($_POST['gender'])) {
                 $genderErr = "Aanhef is niet correct.";
@@ -127,12 +119,13 @@
             <label for="gender">Aanhef:</label>
             <select class="gender" name="gender" id="gender" required>
               <option value="">Kies aanhef</option>
-              <option value="sir" <?php if ($gender=="sir") echo 'selected="selected"';?>>De heer</option>
-              <option value="madam" <?php if ($gender=="madam") echo 'selected="selected"';?>>Mevrouw</option>
-              <option value="other" <?php if ($gender=="other") echo 'selected="selected"';?>>Anders</option>
               <?php 
                 foreach(GENDERS as $gender_key => $gender_value) {
-                    echo '<option value="' . $gender_key . '">' . $gender_value .'</option>' . PHP_EOL; 
+                    echo '<option value="' . $gender_key . '"';
+                    if ($gender == $gender_key) { 
+                        echo ' selected="selected"'; 
+                    }
+                    echo '>' . $gender_value . '</option>' . PHP_EOL; 
                 } 
             ?>
             </select>
@@ -153,13 +146,11 @@
                 
             <fieldset>
                 <label for="preferred">Voorkeur contact: </label>
-                <input type="radio" id="pref-1" name="preferred" <?php if (isset($preferred) && $preferred=="email") echo "checked";?> value="email" required>
-                <label for="pref-1" class="option">Mailen</label>
-                <input type="radio" id="pref-2" name="preferred" <?php if (isset($preferred) && $preferred=="phone") echo "checked";?> value="phone">
-                <label for="pref-2" class="option">Bellen</label>
                 <?php 
                     foreach(PREFERRED as $preferred_key => $preferred_value) {
-                        echo '<radio value="' . $preferred_key . '">' . $preferred_value .'</option>' . PHP_EOL; 
+                        echo '<input type="radio" id="pref-' . $preferred_key . '" name="preferred" '; 
+                        if (isset($preferred) && $preferred==$preferred_key) echo "checked";
+                        echo ' value="'.$preferred_key.'"> ' . PHP_EOL . '<label for="pref-' . $preferred_key . '" class="option">'.$preferred_value.'</label>' . PHP_EOL; 
                     } 
                 ?>
                 <span class="error">* <?php echo $preferredErr; ?></span>
@@ -175,19 +166,21 @@
         <?php } else { ?>
             <p class="bedankt">Bedankt voor het invullen. Ik neem zo snel mogelijk contact met je op!</p>
             <h2>Jouw gegevens:</h2>
+            <div class="results">
             <?php
-            echo GENDERS[$gender];
+            echo 'Aanhef: ' . GENDERS[$gender];
             echo "<br>";
-            echo $name;
+            echo 'Naam: ' . $name;
             echo "<br>";
-            echo $email;
+            echo 'E-mailadres: ' . $email;
             echo "<br>";
-            echo $phone;
+            echo ' Telefoonnummer: ' . $phone;
             echo "<br>";
-            echo PREFERRED[$preferred];
+            echo ' Voorkeur voor: ' . PREFERRED[$preferred];
             echo "<br>";
-            echo $question;?>
+            echo ' Vraag/opmerking: ' . $question;?>
         <?php } ?>
+        </div>
         <footer><p class="copyright">&copy; 2022 Koen Tiepel</p></footer>
     </body>
 
