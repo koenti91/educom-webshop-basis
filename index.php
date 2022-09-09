@@ -32,12 +32,12 @@ function getArrayVar($array, $key, $default ='')
 
 $value = filter_input(INPUT_POST, $key); 
     {    
-    return getArrayVal($_POST, $key, $default);
+    return getArrayVar($_POST, $key, $default);
 }
 
 function getUrlVar($key, $default = '')
 {
-    // zelf invullen
+    return getArrayVar(@_GET, $key, $default);
 }
 
 function beginDocument()
@@ -90,9 +90,13 @@ function showHeader($page)
 
 function showMenu()
 {
-    foreach ($key as $page){
-        showMenu($page);
-    }
+    echo '<div class="menu">
+    <ul class="nav-tabs">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.php">Contact</a></li>
+    </ul>
+    </div>'
 }
 
 function showContent($page)
@@ -118,7 +122,9 @@ function showContent($page)
 
 function showFooter()
 {
-    echo '<footer></footer>';
+    echo '<footer>';
+    echo '<p class="copyright">&copy; 2022 Koen Tiepel</p>'
+    echo '</footer>';
 }
 
 function closeBody()
