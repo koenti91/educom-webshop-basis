@@ -155,7 +155,7 @@ function showContactForm($data) {
              </form> ';
 }
 
-functio showContactThanks () {
+function showContactThanks () {
     echo
         '<p class="bedankt">Bedankt voor het invullen. Ik neem zo snel mogelijk contact met je op!</p>
         <h2>Jouw gegevens:</h2>
@@ -174,3 +174,4 @@ functio showContactThanks () {
         echo ' Vraag/opmerking: ' . $question;?>
         </div>';
 }
+?>
