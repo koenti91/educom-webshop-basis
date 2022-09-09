@@ -1,27 +1,13 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="css/stylesheet.css">
-        <title>Home</title>
-    </head>
+<?php
 
-    <body>
-        <header>
-        Home
-        </header>
+function showHomeHeader() {
+    echo '<h3>Home</h3>';
+}
 
-        <div class="menu">
-            <ul class="nav-tabs">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.php">Contact</a></li>
-            </ul>
-        </div>
-        
-        <p>
-            Welkom op deze website! Ik ga het hier even lekker over mijzelf hebben.
-        </p>
-        <footer><p class="copyright">&copy; 2022 Koen Tiepel</p></footer>
-    </body>
+function showHomeContent() {
+    echo '<p>
+        Welkom op deze website! Ik ga het hier even lekker over mijzelf hebben.
+        </p> ';
+}
 
-</html> 
+?>

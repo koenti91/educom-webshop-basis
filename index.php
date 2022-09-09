@@ -1,8 +1,10 @@
 <?php
 
+// Main
 $page = getRequestedPage();
 showResponsePage($page);
 
+// Functions
 function getRequestedPage()
 {
     $requested_type = $_SERVER('REQUEST_TYPE');
@@ -92,8 +94,8 @@ function showMenu()
 {
     echo '<div class="menu">
     <ul class="nav-tabs">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
+        <li><a href="home.php">Home</a></li>
+        <li><a href="about.php">About</a></li>
         <li><a href="contact.php">Contact</a></li>
     </ul>
     </div>'
