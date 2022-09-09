@@ -20,7 +20,7 @@ function getRequestedPage()
 function showResponsePage($page)
 {
     beginDocument();
-    showHeadSection();
+    showHeadSection($page);
     showBodySection($page);
     endDocument();
 }
@@ -48,17 +48,51 @@ function beginDocument()
 
 function showHeadSection()
 {
-    // zelf invullen
+    switch ($page)
+    {
+        case 'home':
+            require('home.php');
+            showHeadContent();
+            break;
+        case 'about':
+            require('about.php');
+            showHeadContent();
+            break;
+        case 'contact':
+            require('contact.php');
+            showHeadContent();
+            break;
+        default:
+            echo 'Error: Page NOT found';
+    }
 }
 
 function showHeader($page)
 {
-    // zelf invullen
+    switch ($page)
+    {
+        case 'home':
+            require('home.php');
+            showHeaderContent();
+            break;
+        case 'about':
+            require('about.php');
+            showHeaderContent();
+            break;
+        case 'contact':
+            require('contact.php');
+            showHeaderContent();
+            break;
+        default:
+            echo 'Error: Page not found';
+    }
 }
 
 function showMenu()
 {
-    // zelf invullen
+    foreach ($key as $page){
+        showMenu($page);
+    }
 }
 
 function showContent($page)
@@ -70,23 +104,31 @@ function showContent($page)
             showHomeContent();
             break;
         case 'about':
-            // zelf invullen
+            require('about.php');
+            showHomeContent();
+            break;
+        case 'contact':
+            require('contact.php');
+            showHomeContent();
+            break;
+        default: 
+            echo 'Error: Page not found';
     }
 }
 
 function showFooter()
 {
-    // zelf invullen
+    echo '<footer></footer>';
 }
 
 function closeBody()
 {
-    // zelf invullen
+    echo '</body>';
 }
 
 function endDocument()
 {
-    // zelf invullen
+    echo '</html>';
 }
 
 ?>
