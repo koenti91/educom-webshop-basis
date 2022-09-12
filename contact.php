@@ -12,7 +12,7 @@ function showContactContent () {
     if (!$data ["valid"]) {
         showContactForm ($data);
         } else {
-            showContactThanks ();
+            showContactThanks ($data);
     }
 }
 
@@ -22,70 +22,51 @@ function validateContact () {
     $valid = false;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-        if (empty($_POST['gender'])) { 
+        
+        $gender = testInput(getPostVar("gender"));
+        if (empty($gender)) { 
             $genderErr = "Aanhef is verplicht.";
-        } else {
-            $gender = testInput($_POST['gender']);
-            if (!array_key_exists($gender, GENDERS)) {
-                  $genderErr = "Aanhef is niet correct.";
-            }
-        }
-            
-        if (!isset($_POST['gender'])) {
+        } else if (!array_key_exists($gender, GENDERS)) {
             $genderErr = "Aanhef is niet correct.";
-            } else {
-                $gender = testInput($_POST['gender']);
-                }
-                if (!array_key_exists($gender, GENDERS)) {
-                    $genderErr = "Aanhef is niet correct.";
-                }
+        }
 
-        if (empty($_POST['name'])) {
+        $name = testinput(getPostVar("name"));
+        if (empty($name)) {
             $nameErr = "Naam is verplicht";
-        } else {
-            $name = testInput($_POST['name']);}
-            if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
-                $nameErr = "Alleen letters en spaties zijn toegestaan.";
-                }
+        }
+            else if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+            $nameErr = "Alleen letters en spaties zijn toegestaan.";
+        }
         
-        if (empty($_POST["email"])) {
+        $email = testinput(getPostVar("email"));
+        if (empty($email)) {
             $emailErr = "E-mail is verplicht";
-        } else {
-            $email = testInput($_POST["email"]);
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-              $emailErr = "Vul een correct e-mailadres in";
-            }
+        } 
+            else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $emailErr = "Vul een correct e-mailadres in";
         }
         
-        if (empty($_POST["phone"])) {
+        $phone = testinput(getPostVar("phone"));
+        if (empty($phone)) {
             $phoneErr = "Telefoonnummer is verplicht";
-        } else {
-            $phone = testInput($_POST["phone"]);
-            if (!preg_match("/^0([0-9]{9})$/",$phone)) {
-                $phoneErr = "Vul een geldig telefoonnummer in.";
-            }
-        }
-
-        if (empty($_POST["preferred"])) {
-            $preferredErr = "Vul een voorkeur in.";
-        }   else {
-            $preferred = testInput($_POST["preferred"]);
-        }
-
-        if (!isset($_POST['preferred'])) {  
-            $prederredErr = "Vul een voorkeur in."; 
-        } else { 
-            $preferred = testInput($_POST['preferred']); 
-     
-            if (!array_key_exists($preferred, PREFERRED)) {
-                 $preferredErr = "Vul een voorkeur in.";  
-            }
         } 
+            else if (!preg_match("/^0([0-9]{9})$/",$phone)) {
+            $phoneErr = "Vul een geldig telefoonnummer in.";
+        }
 
-        if (empty($_POST["question"])) {
+        $preferred = testinput(getPostVar("preferred"));
+        if (!isset($preferred)) {  
+            $preferredErr = "Vul een voorkeur in."; 
+        } 
+            else if (!array_key_exists($preferred, PREFERRED)) {
+            $preferredErr = "Vul een voorkeur in.";  
+        }
+
+        $question = testinput(getPostVar("question"));    
+        if (empty($question)) {
             $questionErr = " Vul hier je vraag of opmerking in.";
-        }   else {
+        }   
+            else {
             $question = testInput($_POST["question"]);
         }  
 
@@ -95,30 +76,30 @@ function validateContact () {
             $valid = true;
         } 
      }
-
+     return array("gender" => $gender, "genderErr" => $genderErr, 
+                    "name" => $name, "nameErr" => $nameErr, "email" => $email, 
+                    "emailErr" => $emailErr, "phone" => $phone, "phoneErr" => $phoneErr,  
+                    "preferred" => $preferred, "preferredErr" => $preferredErr, 
+                    "question" => $question, "questionErr" => $questionErr,
+                    "valid" => $valid);
 }
 
 function testInput($data) {
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
-    return array("gender" => $gender, "genderErr" => $genderErr, 
-    "name" => $name, "nameErr" => $nameErr, "email" => $email, 
-    "emailErr" => $emailErr, "phone" => $phone, "phoneErr" => $phoneErr,  
-    "preferred" => $preferred, "preferredErr" => $preferredErr, 
-    "question" => $question, "questionErr" => $questionErr,
-    "valid" => $valid);
+    return $data;
 }
 
 function showContactForm($data) {
-    echo '<form action="contact.php" method="post">
+    echo '<form action="index.php" method="post">
             <fieldset>
             <label for="gender">Aanhef:</label>
             <select class="gender" name="gender" id="gender" required>
               <option value="">Kies aanhef</option>';
                 foreach(GENDERS as $gender_key => $gender_value) {
                     echo '<option value="' . $gender_key . '"';
-                    if (data["$gender"] == $gender_key) { 
+                    if ($data["gender"] == $gender_key) { 
                         echo ' selected="selected"'; 
                     }
                     echo '>' . $gender_value . '</option>' . PHP_EOL; 
@@ -144,7 +125,7 @@ function showContactForm($data) {
                 <label for="preferred">Voorkeur contact: </label>';
                     foreach(PREFERRED as $preferred_key => $preferred_value) {
                         echo '<input type="radio" id="pref-' . $preferred_key . '" name="preferred" '; 
-                        if (isset($preferred) && $preferred==$preferred_key) echo "checked";
+                        if ($data["preferred"]==$preferred_key) { echo "checked";}
                         echo ' value="'.$preferred_key.'"> ' . PHP_EOL . '<label for="pref-' . $preferred_key . '" class="option">'.$preferred_value.'</label>' . PHP_EOL; 
                     }
                 echo'     
@@ -152,29 +133,30 @@ function showContactForm($data) {
                 <br>
 
                 <label for="question">Vraag/suggestie: </label>
-                <textarea id="question" name="question" maxlength="1000" required>' . $data["question"] . '</textarea>
+                <textarea type="text" id="question" name="question" maxlength="1000" placeholder="Vul hier iets in.">' . $data["question"] . '</textarea>
                 <span class="error">* ' . $data["questionErr"] . '</span>
             </fieldset>
             <input class="submit" name="submit" type="submit" value="Submit">
+            <input type="hidden" name="page" value="contact" />
              </form> ';
 }
 
-function showContactThanks () {
+function showContactThanks ($data) {
     echo
         '<p class="bedankt">Bedankt voor het invullen. Ik neem zo snel mogelijk contact met je op!</p>
         <h2>Jouw gegevens:</h2>
         <div class="results">';
-        echo 'Aanhef: ' . GENDERS[$gender];
+        echo 'Aanhef: ' . GENDERS[$data["gender"]];
         echo "<br>";
-        echo 'Naam: ' . $name;
+        echo 'Naam: ' . $data["name"];
         echo "<br>";
-        echo 'E-mailadres: ' . $email;
+        echo 'E-mailadres: ' . $data["email"];
         echo "<br>";
-        echo ' Telefoonnummer: ' . $phone;
+        echo ' Telefoonnummer: ' . $data["phone"];
         echo "<br>";
-        echo ' Voorkeur voor: ' . PREFERRED[$preferred];
+        echo ' Voorkeur voor: ' . PREFERRED[$data["preferred"]];
         echo "<br>";
-        echo ' Vraag/opmerking: ' . $question;echo '
+        echo ' Vraag/opmerking: ' . $data["question"];echo '
         </div>';
 }
 ?>

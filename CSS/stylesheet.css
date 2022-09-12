@@ -4,7 +4,7 @@ body {
     height: 100%;
     margin: auto;
     max-width: 800px;
-    font-family: Tahoma;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #FEFBF6;
     color:#3D3C42;
     font-size: 12px;
@@ -88,6 +88,7 @@ textarea {
     width: 400px;
     height: 100px;
     box-sizing: border-box;
+    font-family: inherit;
 }
 
 .submit {

@@ -7,7 +7,7 @@ showResponsePage($page);
 // Functions
 function getRequestedPage()
 {
-    $requested_type = $_SERVER('REQUEST_TYPE');
+    $requested_type = $_SERVER['REQUEST_METHOD'];
     if ($requested_type == 'POST') 
     {
         $requested_page = getPostVar('page','home');
@@ -32,14 +32,14 @@ function getArrayVar($array, $key, $default ='')
     return isset($array[$key]) ? $array[$key] : $default;
 }
 
-$value = filter_input(INPUT_POST, $key); 
+function getPostVar($key, $default ='')
     {    
     return getArrayVar($_POST, $key, $default);
 }
 
 function getUrlVar($key, $default = '')
 {
-    return getArrayVar(@_GET, $key, $default);
+    return getArrayVar($_GET, $key, $default);
 }
 
 function beginDocument()
@@ -71,6 +71,16 @@ function showHeadSection($page)
     echo '</title> <link rel="stylesheet" href="css/stylesheet.css"> </head>';
 }
 
+function showBodySection($page)
+{
+    echo '<body>';
+    showHeader($page);
+    showMenu();
+    showContent($page);
+    showFooter();
+    echo '</body>';
+}
+
 function showHeader($page) {   
     echo ' <header>';
     switch ($page)
@@ -97,9 +107,9 @@ function showMenu()
 {
     echo '<div class="menu">
     <ul class="nav-tabs">
-        <li><a href="home.php">Home</a></li>
-        <li><a href="about.php">About</a></li>
-        <li><a href="contact.php">Contact</a></li>
+        <li><a href="index.php?page=home">Home</a></li>
+        <li><a href="index.php?page=about">About</a></li>
+        <li><a href="index.php?page=contact">Contact</a></li>
     </ul>
     </div>';
 }
@@ -114,11 +124,11 @@ function showContent($page)
             break;
         case 'about':
             require_once('about.php');
-            showHomeContent();
+            showAboutContent();
             break;
         case 'contact':
             require_once('contact.php');
-            showHomeContent();
+            showContactContent();
             break;
         default: 
             echo 'Error: Page not found';
@@ -130,11 +140,6 @@ function showFooter()
     echo '<footer>';
     echo '<p class="copyright">&copy; 2022 Koen Tiepel</p>';
     echo '</footer>';
-}
-
-function closeBody()
-{
-    echo '</body>';
 }
 
 function endDocument()
