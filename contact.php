@@ -128,15 +128,15 @@ function showContactForm($data) {
             <span class="error">* ' . $data["genderErr"] . '</span>
             <br>
             <label for="name">Naam: </label>
-            <input class="name" type="text" id="name" name="name" placeholder="Henk de Vries" maxlength="50" value="<?php echo $name; ?>" required>
+            <input class="name" type="text" id="name" name="name" placeholder="Henk de Vries" maxlength="50" value="' . $data["name"] . '" required>
             <span class="error">* ' . $data["nameErr"] . '</span>
             <br>
             <label for="email">E-mail: </label>
-            <input class="email" type="email" id="email" name="email" placeholder="henk74@gmail.com" maxlength="60" value="<?php echo $email; ?>" required>
+            <input class="email" type="email" id="email" name="email" placeholder="henk74@gmail.com" maxlength="60" value="' . $data["email"] . '" required>
             <span class="error">* ' . $data["emailErr"] . '</span>
             <br>
             <label for="phone">Telefoon: </label>
-            <input class="phone" type="text" id="phone" name="phone" placeholder="0612345678" maxlength="10" pattern="[0-9]{10}" value="<?php echo $phone; ?>" required>
+            <input class="phone" type="text" id="phone" name="phone" placeholder="0612345678" maxlength="10" pattern="[0-9]{10}" value="' . $data["phone"] . '" required>
             <span class="error">* ' . $data["phoneErr"] . '</span>
             </fieldset>
                 
@@ -152,8 +152,8 @@ function showContactForm($data) {
                 <br>
 
                 <label for="question">Vraag/suggestie: </label>
-                <textarea id="question" name="question" maxlength="1000" required>' . echo $question; . '</textarea>
-                <span class="error">* ' . echo $data["questionErr"]; . '</span>
+                <textarea id="question" name="question" maxlength="1000" required>' . $data["question"] . '</textarea>
+                <span class="error">* ' . $data["questionErr"] . '</span>
             </fieldset>
             <input class="submit" name="submit" type="submit" value="Submit">
              </form> ';
