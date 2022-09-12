@@ -1,7 +1,7 @@
 <?php
 
 function showAboutHeader() {
-    echo '<h3>Over mij</h3>';
+    echo 'Over mij';
 }  
 
 function showAboutContent() {

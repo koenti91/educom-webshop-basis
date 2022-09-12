@@ -14,7 +14,7 @@ function getRequestedPage()
     }
     else
     {
-        $requested_page = getUrlVar['page','home'];
+        $requested_page = getUrlVar('page','home');
     }
     return $requested_page;
 }
@@ -48,46 +48,49 @@ function beginDocument()
     <html>';
 }
 
-function showHeadSection()
+function showHeadSection($page)
 {
+    echo '<head> <title>';
     switch ($page)
     {
         case 'home':
-            require('home.php');
-            showHeadContent();
+            require_once('home.php');
+            showHomeHeader();
             break;
         case 'about':
-            require('about.php');
-            showHeadContent();
+            require_once('about.php');
+            showAboutHeader();
             break;
         case 'contact':
-            require('contact.php');
-            showHeadContent();
+            require_once('contact.php');
+            showContactHeader();
             break;
         default:
             echo 'Error: Page NOT found';
     }
+    echo '</title> <link rel="stylesheet" href="css/stylesheet.css"> </head>';
 }
 
-function showHeader($page)
-{
+function showHeader($page) {   
+    echo ' <header>';
     switch ($page)
     {
         case 'home':
-            require('home.php');
-            showHeaderContent();
+            require_once('home.php');
+            showHomeHeader();
             break;
         case 'about':
-            require('about.php');
-            showHeaderContent();
+            require_once('about.php');
+            showAboutHeader();
             break;
         case 'contact':
-            require('contact.php');
-            showHeaderContent();
+            require_once('contact.php');
+            showContactHeader();
             break;
         default:
             echo 'Error: Page not found';
     }
+    echo '</header>';
 }
 
 function showMenu()
@@ -98,7 +101,7 @@ function showMenu()
         <li><a href="about.php">About</a></li>
         <li><a href="contact.php">Contact</a></li>
     </ul>
-    </div>'
+    </div>';
 }
 
 function showContent($page)
@@ -106,15 +109,15 @@ function showContent($page)
     switch ($page)
     {
         case 'home':
-            require('home.php');
+            require_once('home.php');
             showHomeContent();
             break;
         case 'about':
-            require('about.php');
+            require_once('about.php');
             showHomeContent();
             break;
         case 'contact':
-            require('contact.php');
+            require_once('contact.php');
             showHomeContent();
             break;
         default: 
@@ -125,7 +128,7 @@ function showContent($page)
 function showFooter()
 {
     echo '<footer>';
-    echo '<p class="copyright">&copy; 2022 Koen Tiepel</p>'
+    echo '<p class="copyright">&copy; 2022 Koen Tiepel</p>';
     echo '</footer>';
 }
 
