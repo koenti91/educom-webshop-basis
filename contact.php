@@ -8,7 +8,7 @@ function showContactHeader() {
 }
 
 function showContactContent () {
-    $data=validateContact();
+    $data = validateContact();
     if (!$data ["valid"]) {
         showContactForm ($data);
         } else {
@@ -30,7 +30,7 @@ function validateContact () {
             $genderErr = "Aanhef is niet correct.";
         }
 
-        $name = testinput(getPostVar("name"));
+        $name = testInput(getPostVar("name"));
         if (empty($name)) {
             $nameErr = "Naam is verplicht";
         }
@@ -38,7 +38,7 @@ function validateContact () {
             $nameErr = "Alleen letters en spaties zijn toegestaan.";
         }
         
-        $email = testinput(getPostVar("email"));
+        $email = testInput(getPostVar("email"));
         if (empty($email)) {
             $emailErr = "E-mail is verplicht";
         } 
@@ -46,7 +46,7 @@ function validateContact () {
             $emailErr = "Vul een correct e-mailadres in";
         }
         
-        $phone = testinput(getPostVar("phone"));
+        $phone = testInput(getPostVar("phone"));
         if (empty($phone)) {
             $phoneErr = "Telefoonnummer is verplicht";
         } 
@@ -54,7 +54,7 @@ function validateContact () {
             $phoneErr = "Vul een geldig telefoonnummer in.";
         }
 
-        $preferred = testinput(getPostVar("preferred"));
+        $preferred = testInput(getPostVar("preferred"));
         if (!isset($preferred)) {  
             $preferredErr = "Vul een voorkeur in."; 
         } 
@@ -62,7 +62,7 @@ function validateContact () {
             $preferredErr = "Vul een voorkeur in.";  
         }
 
-        $question = testinput(getPostVar("question"));    
+        $question = testInput(getPostVar("question"));    
         if (empty($question)) {
             $questionErr = " Vul hier je vraag of opmerking in.";
         }   
@@ -132,11 +132,11 @@ function showContactForm($data) {
                 <span class="error">* ' . $data["preferredErr"] . '</span>
                 <br>
 
-                <label for="question"><b>Schrijf hier iets: </b></label>
+                <label for="question"><b>Opmerking: </b></label>
                 <textarea type="text" id="question" name="question" maxlength="1000" placeholder="Iets:)">' . $data["question"] . '</textarea>
                 <span class="error">* ' . $data["questionErr"] . '</span>
             </fieldset>
-            <input class="submit" name="submit" type="submit" value="Submit">
+            <input class="submit" name="submit" type="submit" value="Versturen">
             <input type="hidden" name="page" value="contact" />
             </form> ';
 }
@@ -156,7 +156,7 @@ function showContactThanks ($data) {
         echo "<br>";
         echo ' Voorkeur voor: ' . PREFERRED[$data["preferred"]];
         echo "<br>";
-        echo ' Vraag/opmerking: ' . $data["question"];echo '
+        echo ' Opmerking: ' . $data["question"];echo '
         </div>';
 }
 ?>

@@ -47,7 +47,11 @@ h2, h3, .bedankt {
 h3 {
     font-size: 20px;
     margin: 16px 0;
-}    
+} 
+
+p, .hobbies {
+    padding-left: 10px;
+}
 
 label {
     display: inline-block;
