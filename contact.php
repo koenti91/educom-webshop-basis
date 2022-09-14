@@ -122,7 +122,7 @@ function showContactForm($data) {
             </fieldset>
                 
             <fieldset>
-                <label for="preferred"><b>Voorkeur contact: </b></label>';
+                <label class="choose"   for="preferred"><b>Voorkeur contact: </b></label>';
                     foreach(PREFERRED as $preferred_key => $preferred_value) {
                         echo '<input type="radio" id="pref-' . $preferred_key . '" name="preferred" '; 
                         if ($data["preferred"]==$preferred_key) { echo "checked";}
