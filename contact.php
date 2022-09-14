@@ -94,7 +94,7 @@ function testInput($data) {
 function showContactForm($data) {
     echo '<form action="index.php" method="post">
             <fieldset>
-            <label for="gender">Aanhef:</label>
+            <label for="gender"><b>Aanhef:</b></label>
             <select class="gender" name="gender" id="gender" required>
               <option value="">Kies aanhef</option>';
                 foreach(GENDERS as $gender_key => $gender_value) {
@@ -108,21 +108,21 @@ function showContactForm($data) {
             echo'</select>
             <span class="error">* ' . $data["genderErr"] . '</span>
             <br>
-            <label for="name">Naam: </label>
+            <label for="name"><b>Naam: </b></label>
             <input class="name" type="text" id="name" name="name" placeholder="Henk de Vries" maxlength="50" value="' . $data["name"] . '" required>
             <span class="error">* ' . $data["nameErr"] . '</span>
             <br>
-            <label for="email">E-mail: </label>
+            <label for="email"><b>E-mail: </b></label>
             <input class="email" type="email" id="email" name="email" placeholder="henk74@gmail.com" maxlength="60" value="' . $data["email"] . '" required>
             <span class="error">* ' . $data["emailErr"] . '</span>
             <br>
-            <label for="phone">Telefoon: </label>
+            <label for="phone"><b>Telefoon: </b></label>
             <input class="phone" type="text" id="phone" name="phone" placeholder="0612345678" maxlength="10" pattern="[0-9]{10}" value="' . $data["phone"] . '" required>
             <span class="error">* ' . $data["phoneErr"] . '</span>
             </fieldset>
                 
             <fieldset>
-                <label for="preferred">Voorkeur contact: </label>';
+                <label for="preferred"><b>Voorkeur contact: </b></label>';
                     foreach(PREFERRED as $preferred_key => $preferred_value) {
                         echo '<input type="radio" id="pref-' . $preferred_key . '" name="preferred" '; 
                         if ($data["preferred"]==$preferred_key) { echo "checked";}
@@ -132,13 +132,13 @@ function showContactForm($data) {
                 <span class="error">* ' . $data["preferredErr"] . '</span>
                 <br>
 
-                <label for="question">Vraag/suggestie: </label>
-                <textarea type="text" id="question" name="question" maxlength="1000" placeholder="Vul hier iets in.">' . $data["question"] . '</textarea>
+                <label for="question"><b>Schrijf hier iets: </b></label>
+                <textarea type="text" id="question" name="question" maxlength="1000" placeholder="Iets:)">' . $data["question"] . '</textarea>
                 <span class="error">* ' . $data["questionErr"] . '</span>
             </fieldset>
             <input class="submit" name="submit" type="submit" value="Submit">
             <input type="hidden" name="page" value="contact" />
-             </form> ';
+            </form> ';
 }
 
 function showContactThanks ($data) {

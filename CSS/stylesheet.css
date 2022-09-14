@@ -73,7 +73,12 @@ fieldset {
     overflow: hidden;
 }
 
-.gender, .name, .email, .phone, .question, .submit {
+.gender, .name, .email, .phone, .question, .submit, .password, .password-repeat {
+    width: 400px;
+    box-sizing: border-box;
+}
+
+.password {
     width: 400px;
     box-sizing: border-box;
 }
