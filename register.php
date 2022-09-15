@@ -8,8 +8,8 @@ function showRegisterContent() {
     $data=validateRegister();
     if(!$data ["valid"]) {
         showRegisterForm($data);
-    }   else {
-        // Go to login page
+    }  else {
+        saveUser($name, $email, $password);
     }
 }
 
@@ -72,13 +72,17 @@ function validateRegister() {
                 }
             }
 
-        if (empty($nameErr) && (empty($emailErr) && empty($passwordErr) && empty($passwordRepeatErr))) {
-            $valid = true;
+        if (empty($nameErr) && empty($emailErr) && empty($passwordErr) && empty($passwordRepeatErr)){
+            if (empty(findUserByEmail($email))){
+                $valid = true;
+            } else {
+                $emailErr = "E-mailadres is al in gebruik.";
+            }
         }   
     }
 
     return array ("name" => $name, "email" => $email, "password" => $password, "passwordRepeat" => $passwordRepeat,
-                    "nameErr" => $nameErr, "emailErr" => $emailErr, "passwordErr" => "passwordErr",
+                    "nameErr" => $nameErr, "emailErr" => $emailErr, "passwordErr" => $passwordErr,
                     "passwordRepeatErr" => $passwordRepeatErr, "valid" => $valid); 
 }
 
@@ -88,7 +92,30 @@ function testInput($data) {
     $data = htmlspecialchars($data);
     return $data;
 }
+
+function findUserbyEmail($email) {
+    $file = fopen("users/users.txt", "r");
+    $user = NULL;
+    $line = fgets($file);
     
+    while (!feof($file)) {
+        $line = fgets($file);
+        $parts = explode("1", $line);
+        if ($parts [1] == "$email") {
+            $user = array("name" => $parts[0], "email" => $parts[1], "password" => $parts[2]);
+        }
+    }
+    fclose($file);
+    return $user;
+}
+
+function saveUser($name, $email, $password) {
+    $file = fopen("users/users.txt", "a");
+    $newUser = $name . '|' . $email . '|' . $password;
+    fwrite($file, PHP_EOL . $newUser);
+    fclose($file);
+}
+
 function showRegisterForm($data) {
 echo '
 <h3> Registreren</h3>

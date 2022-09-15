@@ -62,6 +62,7 @@ label {
 
 .error {
     color: red;
+    display: inline;
 }
 
 .option {
@@ -102,7 +103,7 @@ textarea {
 
 .submit {
     margin-top: 20px;
-    margin-left: 13 4px;
+    margin-left: 134px;
     width: 400px;
     display: inline-block;
     box-sizing: border-box;
