@@ -63,6 +63,7 @@ label {
 .error {
     color: red;
     display: inline;
+    font-size: 10px;
 }
 
 .option {

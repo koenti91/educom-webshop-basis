@@ -9,7 +9,7 @@ function showRegisterContent() {
     if(!$data ["valid"]) {
         showRegisterForm($data);
     }  else {
-        saveUser($name, $email, $password);
+        saveUser($data["name"], $data["email"], $data["password"]);
     }
 }
 
@@ -20,57 +20,56 @@ function validateRegister() {
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        if (empty($_POST["name"])) {  
+        $name = testInput(getPostvar("name"));
+        if (empty($name)) {
             $nameErr = "Naam is verplicht";
         } 
-            else {
-                $name = testInput($_POST["name"]);
-            if (!preg_match("/^[a-zA-Z' ]*$/",$name)) {
-                $nameErr = "Alleen letters en spaties zijn toegestaan.";
-             }
-         }
-
-        if (empty($_POST["email"])) {
+        else if (!preg_match("/^[a-zA-Z' ]*$/",$name)) {
+            $nameErr = "Alleen letters en spaties zijn toegestaan."; 
+        }
+        
+        $email = testInput(getPostVar("email")); 
+        if (empty($email)) {
             $emailErr = "E-mail is verplicht";
         }
-            else {
-                $email = testInput($_POST["email"]);    
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $emailErr = "Vul een correct e-mailadres in.";
-             }
-         }
+        }
 
+        $password = testInput(getPostvar("password"));
         if (empty($password)) {
             $passwordErr = "Vul hier een wachtwoord in.";
         }
-            else {
-                $password = testInput($_POST["password"]);
-            if (!preg_match('@[A-Z@', $password)) { 
-                $passwordErr = "Wachtwoord moet tenminste een hoofdletter bevatten.";
+        else {
+            $errors = array();
+            if (!preg_match('@[A-Z]@', $password)) { 
+                array_push($errors, "een hoofdletter");
             }
-        }   
+           
             if (!preg_match('@[a-z]@', $password)) {
-                $passwordErr = "Wachtwoord moet tenminste een kleine letter bevatten.";    
-        }
+                array_push($errors, "een kleine letter");    
+            }
             if (!preg_match('@[0-9]@', $password)) {
-                $passwordErr = "Wachtwoord moet tenminste een cijfer bevatten.";
-        }
-            if (!preg_match('@[^/w]@', $password)) {
-                $passwordErr = "Wachtwoord moet tenminste een speciaal teken bevatten.";
-        }
+                array_push($errors, "een cijfer");
+            }
+            if (!preg_match('@[^\w]@', $password)) {
+                array_push($errors, "een speciaal teken");
+            }
             if (strlen($password) < 8) {
-                $passwordErr = "Wachtwoord moet tenminste acht tekens bevatten.";
+                array_push($errors, "acht tekens");
+            }
+            if (!empty($errors)) {
+                $passwordErr = "Wachtwoord moet tenminste " . implode(", ", $errors) . " bevatten.";
+            }
         }
 
+        $passwordRepeat = testInput(getPostvar("password-repeat"));
         if (empty($passwordRepeat)) {
             $passwordRepeatErr = "Herhaal hier je gekozen wachtwoord.";
         }
-            else {
-                $passwordRepeat = testInput($_POST["passwordRepeat"]);
-                  if ($_POST["password"]!= $_POST["passwordRepeat"]) {
-                    $passwordRepeatErr = "Je wachtwoorden komen niet overeen.";
-                }
-            }
+        else if ($password != $passwordRepeat) {
+            $passwordRepeatErr = "Je wachtwoorden komen niet overeen.";
+        }
 
         if (empty($nameErr) && empty($emailErr) && empty($passwordErr) && empty($passwordRepeatErr)){
             if (empty(findUserByEmail($email))){
@@ -100,9 +99,9 @@ function findUserbyEmail($email) {
     
     while (!feof($file)) {
         $line = fgets($file);
-        $parts = explode("1", $line);
-        if ($parts [1] == "$email") {
-            $user = array("name" => $parts[0], "email" => $parts[1], "password" => $parts[2]);
+        $parts = explode("|", $line);
+        if ($parts [0] == "$email") {
+            $user = array("email" => $parts[0], "name" => $parts[1], "password" => $parts[2]);
         }
     }
     fclose($file);
@@ -111,7 +110,7 @@ function findUserbyEmail($email) {
 
 function saveUser($name, $email, $password) {
     $file = fopen("users/users.txt", "a");
-    $newUser = $name . '|' . $email . '|' . $password;
+    $newUser = $email . '|' . $name . '|' . $password;
     fwrite($file, PHP_EOL . $newUser);
     fclose($file);
 }
