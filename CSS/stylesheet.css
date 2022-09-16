@@ -66,6 +66,13 @@ label {
     font-size: 10px;
 }
 
+.error2{
+    margin-left: 124px;
+    color: red;
+    font-size: 10px;
+    display: inline;
+}
+
 .option {
     width: 50px;
     }
@@ -104,7 +111,7 @@ textarea {
 
 .submit {
     margin-top: 20px;
-    margin-left: 134px;
+    margin-left: 124px;
     width: 400px;
     display: inline-block;
     box-sizing: border-box;

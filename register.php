@@ -5,7 +5,7 @@ function showRegisterHeader() {
 }
 
 function showRegisterContent() {
-    $data=validateRegister();
+    $data = validateRegister();
     if(!$data ["valid"]) {
         showRegisterForm($data);
     }  else {
