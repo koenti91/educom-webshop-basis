@@ -10,79 +10,9 @@ function showRegisterContent() {
         showRegisterForm($data);
     }  else {
         saveUser($data["name"], $data["email"], $data["password"]);
+        header("Location: http://" . $_SERVER["HTTP_HOST"]. "/educom-webshop-basis/index.php?page=login");
+        die();
     }
-}
-
-function validateRegister() {
-    $name = $email = $password = $passwordRepeat = '';
-    $nameErr = $emailErr = $passwordErr = $passwordRepeatErr = '';
-    $valid = false;
-
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-        $name = testInput(getPostvar("name"));
-        if (empty($name)) {
-            $nameErr = "Naam is verplicht";
-        } 
-        else if (!preg_match("/^[a-zA-Z' ]*$/",$name)) {
-            $nameErr = "Alleen letters en spaties zijn toegestaan."; 
-        }
-        
-        $email = testInput(getPostVar("email")); 
-        if (empty($email)) {
-            $emailErr = "E-mail is verplicht";
-        }
-        else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $emailErr = "Vul een correct e-mailadres in.";
-        }
-
-        $password = testInput(getPostvar("password"));
-        if (empty($password)) {
-            $passwordErr = "Vul hier een wachtwoord in.";
-        }
-        else {
-            $errors = array();
-            if (!preg_match('@[A-Z]@', $password)) { 
-                array_push($errors, "een hoofdletter");
-            }
-           
-            if (!preg_match('@[a-z]@', $password)) {
-                array_push($errors, "een kleine letter");    
-            }
-            if (!preg_match('@[0-9]@', $password)) {
-                array_push($errors, "een cijfer");
-            }
-            if (!preg_match('@[^\w]@', $password)) {
-                array_push($errors, "een speciaal teken");
-            }
-            if (strlen($password) < 8) {
-                array_push($errors, "acht tekens");
-            }
-            if (!empty($errors)) {
-                $passwordErr = "Wachtwoord moet tenminste " . implode(", ", $errors) . " bevatten.";
-            }
-        }
-
-        $passwordRepeat = testInput(getPostvar("password-repeat"));
-        if (empty($passwordRepeat)) {
-            $passwordRepeatErr = "Herhaal hier je gekozen wachtwoord.";
-        }
-        else if ($password != $passwordRepeat) {
-            $passwordRepeatErr = "Je wachtwoorden komen niet overeen.";
-        }
-
-        if (empty($nameErr) && empty($emailErr) && empty($passwordErr) && empty($passwordRepeatErr)){
-            if (empty(findUserByEmail($email))){
-                $valid = true;
-            } else {
-                $emailErr = "E-mailadres is al in gebruik.";
-            }
-        }   
-    }
-
-    return array ("name" => $name, "email" => $email, "password" => $password, "passwordRepeat" => $passwordRepeat,
-                    "nameErr" => $nameErr, "emailErr" => $emailErr, "passwordErr" => $passwordErr,
-                    "passwordRepeatErr" => $passwordRepeatErr, "valid" => $valid); 
 }
 
 function testInput($data) {
@@ -110,8 +40,8 @@ function findUserbyEmail($email) {
 
 function saveUser($name, $email, $password) {
     $file = fopen("users/users.txt", "a");
-    $newUser = $email . '|' . $name . '|' . $password;
-    fwrite($file, PHP_EOL . $newUser);
+    $newUser = $email . '|' . $name . '|' . md5($password);
+    fwrite($file, PHP_EOL . $newUser); 
     fclose($file);
 }
 

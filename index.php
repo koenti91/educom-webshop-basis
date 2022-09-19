@@ -1,5 +1,9 @@
 <?php
 
+session_start();
+
+include('functions.php');
+
 // Main
 $page = getRequestedPage();
 showResponsePage($page);
@@ -21,6 +25,14 @@ function getRequestedPage()
 
 function showResponsePage($page)
 {
+    if (!empty($_GET['logout'])) {
+        session_destroy();
+        header("Location: http://" . $_SERVER["HTTP_HOST"]. "/educom-webshop-basis/index.php?page=home");
+        die();
+    } else if (!empty($_SESSION['email'])) {
+        define('USER', UserFunctions::findUserByEmail($_SESSION['email']));
+    }
+
     beginDocument();
     showHeadSection($page);
     showBodySection($page);
@@ -125,10 +137,16 @@ function showMenu()
     <ul class="nav-tabs">
         <li><a href="index.php?page=home">Home</a></li>
         <li><a href="index.php?page=about">About</a></li>
-        <li><a href="index.php?page=contact">Contact</a></li>
-        <li><a href="index.php?page=register">Registreren</a></li>
-        <li><a href="index.php?page=login">Login</a></li>
-    </ul>
+        <li><a href="index.php?page=contact">Contact</a></li>';
+
+    if (!empty($_SESSION['email'])) {
+        echo '<li><a href="index.php?page=home&logout=1">Logout ' . USER['name'] . '</a></li>';
+    } else {
+        echo ' <li><a href="index.php?page=register">Registreren</a></li>
+        <li><a href="index.php?page=login">Login</a></li>';
+    }
+   
+    echo '</ul>
     </div>';
 }
 

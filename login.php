@@ -5,50 +5,19 @@ function showLoginHeader() {
 }
 
 function showLoginContent () {
+
+    if (!empty($_SESSION['email'])) {
+        header("Location: http://" . $_SERVER["HTTP_HOST"]. "/educom-webshop-basis/index.php?page=home");
+        die();
+    }
+
     $data = validateLogin();
     if(!$data ["valid"]) {
         showLoginForm($data);
-    }   else {
-        
+    } else {
+        header("Location: http://" . $_SERVER["HTTP_HOST"]. "/educom-webshop-basis/index.php?page=home");
+        die();
     }
-}
-
-function validateLogin() {
-    $email = $password = '';
-    $emailErr = $passwordErr = '';
-    $valid = false;
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        
-        $email = testInput(getPostVar("email"));
-        if (empty($email)) {
-            $emailErr = "Vul je e-mailadres in.";
-        }
-
-        $password = testInput(getPostVar("password"));
-        if (empty($password)) {
-            $passwordErr = "Vul je gekozen wachtwoord in.";
-        }
-
-        if (empty($emailErr) && empty($passwordErr)) {
-            $valid = true;
-        }
-
-        if ($valid) {
-            require_once("users/users.txt");
-            $user = authenticateUser ($email, $password);
-            if (empty($user)) {
-                $valid = false;
-                $emailErr = "E-mailadres is niet bekend of wachtwoord wordt niet herkend.";
-            }
-            else {
-                $email = $user["email"];
-            }
-        }
-    }
-    
-    return array("email" => $email, "password" => $password, "emailErr" => $emailErr, 
-                "passwordErr" => $passwordErr, "valid" => $valid);
 }
 
 function testInput($data) {
@@ -65,24 +34,26 @@ function doesUserExist($email) {
 
 function authenticateUser($email, $password) {
     $user = findUserbyEmail($email);
+
     if (empty($user)) {
         return NULL;
     }
-    if ($password == $user["password"]) {
+    if (md5(trim($password)) == trim($user['password'])) {
+        $_SESSION["email"] = $user['email'];
         return $user;
     }
     return NULL;
 }
 
-function findUserbyEmail($email) {
+function findUserByEmail($email) {
     $file = fopen("users/users.txt", "r");
     $user = NULL;
     $line = fgets($file);
-    
+
     while (!feof($file)) {
         $line = fgets($file);
         $parts = explode("|", $line);
-        if ($parts [0] == "$email") {
+        if ($parts[0] === $email) {
             $user = array("email" => $parts[0], "name" => $parts[1], "password" => $parts[2]);
         }
     }
@@ -98,8 +69,7 @@ function showLoginForm($data) {
 
     <fieldset>
       <label for="email"><b>E-mailadres: </b></label>
-      <input class="email" type="email" name="email" placeholder="Vul je e-mailadres in." maxlength="60"
-        value="' . $data["email"] . '" required>
+      <input class="email" type="email" name="email" placeholder="Vul je e-mailadres in." maxlength="60" value="' . $data["email"] . '" required>
       <span class="error">*</span>
         <br>
       <label for="password"><b>Wachtwoord: </b></label>

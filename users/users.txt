@@ -1,5 +1,2 @@
 [email]|[naam]|[wachtwoord]
-coach@man-kind.nl|Geert Weggemans|halt!
-
-koentje@live.nl|Koen Tiepel|Qwerty123.
-henk74@gmail.com|asd|Qwerty123.
+koentiepel@live.nl|Koen|ca9c4085b5aecda0fb3d5dc9f0c6646f
