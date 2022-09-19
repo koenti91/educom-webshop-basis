@@ -1,14 +1,79 @@
 <?php
 
 session_start();
-
-include('functions.php');
+require_once ("session_manager.php");
 
 // Main
 $page = getRequestedPage();
+$data = processRequest($page);
 showResponsePage($page);
 
 // Functions
+
+function processRequest($page) {
+    switch ($page) {
+        case "login":
+            $data = validateLogin();
+            if ($data['valid']) {
+                doLoginUser($data['name']);
+                $page = 'home';
+            }
+            break;
+
+        case 'logout':
+            doLogoutUser();
+            $page = 'home';
+            break;
+
+        case 'contact':
+            $data = validateContact();
+            if($data['valid']) {
+                $page = 'thanks';
+            }
+            break;
+            
+        case 'register':
+            $data = validateRegister();
+            if ($data['valid']) {
+                saveUser($data["name"], $data["email"], $data["password"]);
+                $page = 'login';
+            }
+            break;
+    }
+
+    $data['page'] = $page;
+
+    return $data;
+}
+
+function showContent($data) {
+    switch ($data['page']) {
+        case 'home':
+            showHomeContent();
+            break;
+
+        case 'about':
+            showAboutContent();
+            break;
+
+        case 'contact':
+            showContactForm($data);
+            break;
+
+        case 'thanks':
+            showContactThanks($data);
+            break;
+
+        case 'login':
+            showLoginForm($data);
+            break;
+
+        case 'register':
+            showRegisterForm($data);
+            break;
+    }
+}
+
 function getRequestedPage()
 {
     $requested_type = $_SERVER['REQUEST_METHOD'];
@@ -30,7 +95,7 @@ function showResponsePage($page)
         header("Location: http://" . $_SERVER["HTTP_HOST"]. "/educom-webshop-basis/index.php?page=home");
         die();
     } else if (!empty($_SESSION['email'])) {
-        define('USER', UserFunctions::findUserByEmail($_SESSION['email']));
+
     }
 
     beginDocument();
@@ -133,51 +198,26 @@ function showHeader($page) {
 
 function showMenu()
 {
-    echo '<div class="menu">
-    <ul class="nav-tabs">
-        <li><a href="index.php?page=home">Home</a></li>
-        <li><a href="index.php?page=about">About</a></li>
-        <li><a href="index.php?page=contact">Contact</a></li>';
+    echo '<div class="menu"><ul class="nav-tabs">';
 
-    if (!empty($_SESSION['email'])) {
-        echo '<li><a href="index.php?page=home&logout=1">Logout ' . USER['name'] . '</a></li>';
+    echo showMenuItem('home', 'Home'); 
+    echo showMenuItem('about', 'About'); 
+    echo showMenuItem('contact', 'Contact'); 
+
+    if (isUserLoggedIn()) {
+        echo showMenuItem("logout", "Logout" + getLoggedInUsername());
     } else {
-        echo ' <li><a href="index.php?page=register">Registreren</a></li>
-        <li><a href="index.php?page=login">Login</a></li>';
+        echo showMenuItem ("login", "Login");
+        echo showMenuItem ("register", "Registreer");
     }
-   
-    echo '</ul>
-    </div>';
+
+    echo '</ul></div>';
 }
 
-function showContent($page)
-{
-    switch ($page)
-    {
-        case 'home':
-            require_once('home.php');
-            showHomeContent();
-            break;
-        case 'about':
-            require_once('about.php');
-            showAboutContent();
-            break;
-        case 'contact':
-            require_once('contact.php');
-            showContactContent();
-            break;
-        case 'register':
-            require_once('register.php');
-            showRegisterContent();
-            break;
-        case 'login':
-            require_once('login.php');
-            showLoginContent();
-            break;
-        default: 
-            echo 'Error: Page not found';
-    }
+function showMenuItem($page, $label) {
+    return '<li><a href="index.php?page='.$page.'">'.$label.'</a></li>';
 }
+
 
 function showFooter()
 {

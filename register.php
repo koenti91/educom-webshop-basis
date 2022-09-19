@@ -38,13 +38,6 @@ function findUserbyEmail($email) {
     return $user;
 }
 
-function saveUser($name, $email, $password) {
-    $file = fopen("users/users.txt", "a");
-    $newUser = $email . '|' . $name . '|' . md5($password);
-    fwrite($file, PHP_EOL . $newUser); 
-    fclose($file);
-}
-
 function showRegisterForm($data) {
 echo '
 <h3> Registreren</h3>

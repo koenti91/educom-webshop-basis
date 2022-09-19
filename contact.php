@@ -16,8 +16,6 @@ function showContactContent () {
     }
 }
 
-
-
 function showContactForm($data) {
     echo '<form action="index.php" method="post">
             <fieldset>
