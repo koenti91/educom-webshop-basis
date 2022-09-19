@@ -1,5 +1,7 @@
 <?php
 
+include 'validations.php'; 'user_service.php'; 'session_manager.php'; 'file_repository.php';
+
 session_start();
 require_once ("session_manager.php");
 
@@ -92,10 +94,9 @@ function showResponsePage($page)
 {
     if (!empty($_GET['logout'])) {
         session_destroy();
-        header("Location: http://" . $_SERVER["HTTP_HOST"]. "/educom-webshop-basis/index.php?page=home");
-        die();
-    } else if (!empty($_SESSION['email'])) {
-
+        $page = 'home';
+    } else if (!empty($_SESSION['email'])) {        
+        $page = 'home';
     }
 
     beginDocument();
@@ -217,7 +218,6 @@ function showMenu()
 function showMenuItem($page, $label) {
     return '<li><a href="index.php?page='.$page.'">'.$label.'</a></li>';
 }
-
 
 function showFooter()
 {

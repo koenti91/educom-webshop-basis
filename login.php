@@ -7,16 +7,14 @@ function showLoginHeader() {
 function showLoginContent () {
 
     if (!empty($_SESSION['email'])) {
-        header("Location: http://" . $_SERVER["HTTP_HOST"]. "/educom-webshop-basis/index.php?page=home");
-        die();
+       // redirect to home page
     }
 
     $data = validateLogin();
     if(!$data ["valid"]) {
         showLoginForm($data);
     } else {
-        header("Location: http://" . $_SERVER["HTTP_HOST"]. "/educom-webshop-basis/index.php?page=home");
-        die();
+        // redirect to home page
     }
 }
 

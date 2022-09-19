@@ -10,7 +10,7 @@ function showRegisterContent() {
         showRegisterForm($data);
     }  else {
         saveUser($data["name"], $data["email"], $data["password"]);
-        header("Location: http://" . $_SERVER["HTTP_HOST"]. "/educom-webshop-basis/index.php?page=login");
+        // redirect to login page
         die();
     }
 }
@@ -20,22 +20,6 @@ function testInput($data) {
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
     return $data;
-}
-
-function findUserbyEmail($email) {
-    $file = fopen("users/users.txt", "r");
-    $user = NULL;
-    $line = fgets($file);
-    
-    while (!feof($file)) {
-        $line = fgets($file);
-        $parts = explode("|", $line);
-        if ($parts [0] == "$email") {
-            $user = array("email" => $parts[0], "name" => $parts[1], "password" => $parts[2]);
-        }
-    }
-    fclose($file);
-    return $user;
 }
 
 function showRegisterForm($data) {

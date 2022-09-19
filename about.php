@@ -1,7 +1,5 @@
 <?php
 
-require_once('layout_utils.php':
-
 function showAboutHeader() {
     echo 'Over mij';
 }  

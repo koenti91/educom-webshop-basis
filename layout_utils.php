@@ -1,4 +1,4 @@
-<?php
+<?php /*
 
 function beginDocument()
 {
@@ -58,3 +58,4 @@ function endDocument()
 {
     echo '</html>';
 }
+*/ ?>
