@@ -4,28 +4,6 @@ function showLoginHeader() {
     echo ' Login';
 }
 
-function showLoginContent () {
-
-    if (!empty($_SESSION['email'])) {
-       // redirect to home page
-    }
-
-    $data = validateLogin();
-    if(!$data ["valid"]) {
-        showLoginForm($data);
-    } else {
-        // redirect to home page
-    }
-}
-
-function testInput($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-
-
 function showLoginForm($data) {
     echo '
     <h3> Login</h3>

@@ -4,24 +4,6 @@ function showRegisterHeader() {
     echo 'Registreren';
 }
 
-function showRegisterContent() {
-    $data = validateRegister();
-    if(!$data ["valid"]) {
-        showRegisterForm($data);
-    }  else {
-        saveUser($data["name"], $data["email"], $data["password"]);
-        // redirect to login page
-        die();
-    }
-}
-
-function testInput($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-
 function showRegisterForm($data) {
 echo '
 <h3> Registreren</h3>
