@@ -2,8 +2,8 @@
 
 session_start();
 
-require_once ("session_manager.php");
 require_once ("constants.php");
+require_once ("session_manager.php");
 require_once ("validations.php");
 require_once ("user_service.php");
 require_once ("file_repository.php");
@@ -11,7 +11,8 @@ require_once ("file_repository.php");
 // Main
 $page = getRequestedPage();
 $data = processRequest($page);
-showResponsePage($page);
+showResponsePage($data);
+
 
 // Functions
 
@@ -95,13 +96,12 @@ function getRequestedPage()
 
 function showResponsePage($data)
 {
- /*   if (!empty($_GET['logout'])) {
-        session_destroy();
-        $page = 'home';
-    } else if (!empty($_SESSION['email'])) {        
-        $page = 'home';
-    }
-*/
+    // if (!empty($_GET['logout'])) {
+    //     session_destroy();
+    //     $data['page'] = 'home';
+    // } else if (!empty($_SESSION['email'])) {        
+    //     $data['page'] = 'home';
+    // }
 
     beginDocument();
     showHeadSection($data);
@@ -210,7 +210,7 @@ function showMenu()
     echo showMenuItem('contact', 'Contact'); 
 
     if (isUserLoggedIn()) {
-        echo showMenuItem("logout", "Logout" + getLoggedInUsername());
+        echo showMenuItem("logout", "Logout " . getLoggedInUsername());
     } else {
         echo showMenuItem ("login", "Login");
         echo showMenuItem ("register", "Registreer");
