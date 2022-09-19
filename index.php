@@ -1,9 +1,12 @@
 <?php
 
-include 'validations.php'; 'user_service.php'; 'session_manager.php'; 'file_repository.php';
-
 session_start();
+
 require_once ("session_manager.php");
+require_once ("constants.php");
+require_once ("validations.php");
+require_once ("user_service.php");
+require_once ("file_repository.php");
 
 // Main
 $page = getRequestedPage();
@@ -51,11 +54,11 @@ function processRequest($page) {
 function showContent($data) {
     switch ($data['page']) {
         case 'home':
-            showHomeContent();
+            showHomeContent($data);
             break;
 
         case 'about':
-            showAboutContent();
+            showAboutContent($data);
             break;
 
         case 'contact':
@@ -90,18 +93,19 @@ function getRequestedPage()
     return $requested_page;
 }
 
-function showResponsePage($page)
+function showResponsePage($data)
 {
-    if (!empty($_GET['logout'])) {
+ /*   if (!empty($_GET['logout'])) {
         session_destroy();
         $page = 'home';
     } else if (!empty($_SESSION['email'])) {        
         $page = 'home';
     }
+*/
 
     beginDocument();
-    showHeadSection($page);
-    showBodySection($page);
+    showHeadSection($data);
+    showBodySection($data);
     endDocument();
 }
 
@@ -157,19 +161,19 @@ function showHeadSection($page)
     echo '</title> <link rel="stylesheet" href="css/stylesheet.css"> </head>';
 }
 
-function showBodySection($page)
+function showBodySection($data)
 {
     echo '<body>';
-    showHeader($page);
+    showHeader($data);
     showMenu();
-    showContent($page);
+    showContent($data);
     showFooter();
     echo '</body>';
 }
 
-function showHeader($page) {   
+function showHeader($data) {   
     echo ' <header>';
-    switch ($page)
+    switch ($data['page'])
     {
         case 'home':
             require_once('home.php');

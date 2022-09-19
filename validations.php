@@ -4,6 +4,7 @@ function validateLogin() {
         $email = $password = '';
         $emailErr = $passwordErr = '';
         $valid = false;
+        $name = '';
     
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
@@ -26,15 +27,20 @@ function validateLogin() {
                 if (empty($user)) {
                     $valid = false;
                     $emailErr = "E-mailadres is niet bekend of wachtwoord wordt niet herkend.";
-                }
-                else {
+                } else {
                     $email = $user["email"];
+                    $name = $user["name"];
                 }
             }
         }
         
-        return array("email" => $email, "password" => $password, "emailErr" => $emailErr, 
-                    "passwordErr" => $passwordErr, "valid" => $valid);
+        return array(
+                    "email" => $email, 
+                    "password" => $password, 
+                    "name" => $name,
+                    "emailErr" => $emailErr, 
+                    "passwordErr" => $passwordErr, 
+                    "valid" => $valid);
     }
 
     function validateRegister() {
